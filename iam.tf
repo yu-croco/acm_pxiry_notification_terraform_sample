@@ -13,7 +13,7 @@ data "aws_iam_policy_document" "chatbot" {
   }
 }
 
-data "aws_iam_policy_document" "chatbot" {
+data "aws_iam_policy_document" "chatbot_additional" {
   statement {
     effect = "Allow"
     actions = [
@@ -25,12 +25,12 @@ data "aws_iam_policy_document" "chatbot" {
   }
 }
 
-resource "aws_iam_policy" "chatbot" {
-  name        = "chatbot-policy"
-  policy      = data.aws_iam_policy_document.chatbot.json
+resource "aws_iam_policy" "chatbot_additional" {
+  name   = "chatbot-additional-policy"
+  policy = data.aws_iam_policy_document.chatbot_additional.json
 }
 
-resource "aws_iam_role_policy_attachment" "chatbot" {
+resource "aws_iam_role_policy_attachment" "chatbot_additional" {
   role       = aws_iam_role.chatbot.name
-  policy_arn = aws_iam_policy.chatbot.arn
+  policy_arn = aws_iam_policy.chatbot_additional.arn
 }
